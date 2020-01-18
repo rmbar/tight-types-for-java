@@ -98,6 +98,6 @@ public class EmptyStrOrEmptyTest
     @Test
     public void testToString()
     {
-        Assert.assertEquals("", new EmptyStrOrEmpty().toString());
+        Assert.assertEquals("", new EmptyStrOrEmpty<>().toString());
     }
 }
