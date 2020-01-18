@@ -49,12 +49,6 @@ class EmptyStrOrNonEmpty<S extends NonEmptyString> implements EmptyStrOr<S>
     }
 
     @Override
-    public boolean isNonEmptyString()
-    {
-        return true;
-    }
-
-    @Override
     public S getOrDefault(S defaultValue)
     {
         return _string;

@@ -52,7 +52,10 @@ public interface EmptyStrOr<S extends NonEmptyString>
     /**
      * @return <code>true</code> if this string is non-empty, otherwise <code>false</code>
      */
-    boolean isNonEmptyString();
+    default boolean isNonEmptyString()
+    {
+        return !isEmptyString();
+    }
 
     /**
      * Retrieves the non-empty string value if this string is non-empty, otherwise returns <code>defaultValue</code>.
