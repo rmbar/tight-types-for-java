@@ -25,32 +25,39 @@
 package io.tighttypes;
 
 /**
- * An immutable string value that encapsulates either an empty string or an instance of <code>NonEmptyString</code>.
+ * An immutable string that's content is defined by an encapsulated inner immutable string that is either the empty
+ * string or an instance of a descendant of {@code NonEmptyString}.
+ *
+ * This interface is useful for describing a value that is restricted to being either an instance of {@code S} or the
+ * empty string. Namely it models the union of {@code S} and the empty string.
+ *
+ * @param <S> the type of the inner string that may be encapsulated by this wrapper if the wrapper is in the non-empty
+ *           state.
  */
 public interface EmptyStrOr<S extends NonEmptyString>
 {
     /**
-     * Performs one of two operations (both encapsulated in <code>cases</code>) depending on whether the string
+     * Performs one of two operations (both encapsulated in {@code cases}) depending on whether this string
      * is empty or not.
      *
      * If this string is empty, performs {@code cases.forEmpty()}. Otherwise performs
-     * {@code cases.forNonEmpty(S)} passing in the string value.
+     * {@code cases.forNonEmpty(S)} passing in the inner string value.
      *
-     * @param cases the two possible operations
-     * @param <R> the result type of executing either of the operations
-     * @param <T> the type of exception that may be raised by performing either of the operations
-     * @return the result of performing one of the two given operations
-     * @throws T if there is a problem performing the operation
+     * @param cases the two possible operations. may not be {@code null}.
+     * @param <R> the result type of executing either of the operations.
+     * @param <T> the type of the exception that may be raised by performing either of the operations.
+     * @return the result of performing one of the two given operations.
+     * @throws T if there is an exception while performing the operation.
      */
     <R, T extends Throwable> R which(EmptyStrOrCases<R, S, T> cases) throws T;
 
     /**
-     * @return <code>true</code> if this string is empty, otherwise <code>false</code>
+     * @return {@code true} if this string's content is empty, otherwise {@code false}
      */
     boolean isEmptyString();
 
     /**
-     * @return <code>true</code> if this string is non-empty, otherwise <code>false</code>
+     * @return {@code false} if this string's content is empty, otherwise {@code true}
      */
     default boolean isNonEmptyString()
     {
@@ -58,21 +65,20 @@ public interface EmptyStrOr<S extends NonEmptyString>
     }
 
     /**
-     * Retrieves the non-empty string value if this string is non-empty, otherwise returns <code>defaultValue</code>.
+     * Retrieves the inner non-empty string value if this string is non-empty, otherwise returns {@code defaultValue}.
      *
-     * @param defaultValue the value to return if this string is empty.
-     * @return the value of the string or <code>defaultValue</code>.
+     * @param defaultValue the value to return if this string is empty. may be {@code null}.
+     * @return the inner string or {@code defaultValue}.
      */
     S getOrDefault(S defaultValue);
 
     /**
-     * @return if non-empty returns {@link NonEmptyString#toString()} otherwise <code>""</code>.
+     * @return if non-empty returns {@link NonEmptyString#toString()} otherwise {@code ""}.
      */
     String toString();
 
     /**
-     * @param <S> the specific type of <code>NonEmptyString</code>
-     * @return an object of this class in the empty state.
+     * @return a {@code EmptyStrOr<S>} instance with an inner empty string as content. never {@code null}.
      */
     static <S extends NonEmptyString> EmptyStrOr<S> make()
     {
@@ -80,12 +86,14 @@ public interface EmptyStrOr<S extends NonEmptyString>
     }
 
     /**
-     * @param string the non-empty string value.
-     * @param <S> the specific type of <code>NonEmptyString</code>
-     * @return an object of this class in the non-empty state.
+     * @param string the non-empty string value to use as the returned string's content. may not be {@code null}.
+     * @return a {@code EmptyStrOr<S>} instance with the given inner string as content. never {@code null}.
      */
     static <S extends NonEmptyString> EmptyStrOr<S> make(S string)
     {
+        if(string == null)
+            throw new NullPointerException("string");
+        
         return new EmptyStrOrNonEmpty<>(string);
     }
 }
