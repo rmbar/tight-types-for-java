@@ -31,16 +31,16 @@ package io.tighttypes;
 public interface NonNegInt extends NonNegLong
 {
     /**
-     * @return the value of the <code>NonNegInt</code> in <code>int</code> form.
+     * @return the value of the {@code NonNegInt} in {@code int} form.
      */
     int toInt();
 
     /**
-     * Creates a new <code>NonNegInt</code> from the given value.
+     * Creates a new {@code NonNegInt} from the given value.
      *
-     * @param value the value of the <code>NonNegInt</code>.
-     * @return the new number.
-     * @throws IllegalArgumentException if <code>value</code> is less than zero.
+     * @param value the value of the {@code NonNegInt}.
+     * @return the number.
+     * @throws IllegalArgumentException if {@code value} is less than zero.
      */
     static NonNegInt make(int value)
     {
@@ -64,15 +64,19 @@ public interface NonNegInt extends NonNegLong
     }
 
     /**
-     * Creates a new <code>NonNegInt</code> from the given value.
+     * Creates a {@code NonNegInt} from the given string value.
      *
-     * @param value the value of the <code>NonNegInt</code>.
-     * @throws IllegalArgumentException if <code>value</code> is less than zero.
-     * @return the parsed value of the string
-     * @throws NumberFormatException if the string does not contain a parsable {@code int}.
+     * @param value the value of the {@code NonNegInt}. may not be {@code null}.
+     * @return the parsed value of the given string. never {@code null}.
+     * @throws NullPointerException if the given value is {@code null}.
+     * @throws NumberFormatException if the given string is not parsable into a {@code int}.
+     * @throws IllegalArgumentException if {@code value} is less than zero.
      */
     static NonNegInt parse(String value)
     {
+        if(value == null)
+            throw new NullPointerException("value");
+
         int intValue = Integer.parseInt(value);
         return make(intValue);
     }

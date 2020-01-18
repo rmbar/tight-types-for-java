@@ -34,11 +34,12 @@ class LatinLettersStrDefault extends NonEmptyStringDefault implements LatinLette
         {
             int codePoint = string.codePointAt(i);
 
+            // check only A-Z or a-z
             if((codePoint >= 65 && codePoint <= 90) || (codePoint >= 97 && codePoint <= 122))
                 continue;
 
             throw new IllegalArgumentException("value may only be composed of A-Z, and a-z found " +
-                    string.charAt(i) + " at position " + i + " in " + string);
+                                                string.charAt(i) + " at position " + i + " in " + string);
         }
     }
 }

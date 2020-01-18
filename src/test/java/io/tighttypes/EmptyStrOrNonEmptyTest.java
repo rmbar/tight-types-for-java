@@ -32,28 +32,28 @@ public class EmptyStrOrNonEmptyTest
     @Test
     public void testIsEmptyString()
     {
-        NonEmptyString dog = NonEmptyString.parse("dog");
+        NonEmptyString dog = NonEmptyString.make("dog");
         Assert.assertFalse(new EmptyStrOrNonEmpty<>(dog).isEmptyString());
     }
 
     @Test
     public void testIsNonEmptyString()
     {
-        NonEmptyString dog = NonEmptyString.parse("dog");
+        NonEmptyString dog = NonEmptyString.make("dog");
         Assert.assertTrue(new EmptyStrOrNonEmpty<>(dog).isNonEmptyString());
     }
 
     @Test
     public void testGetOrDefault()
     {
-        NonEmptyString dog = NonEmptyString.parse("dog");
+        NonEmptyString dog = NonEmptyString.make("dog");
         Assert.assertEquals("dog", new EmptyStrOrNonEmpty<>(dog).getOrDefault(null).toString());
     }
 
     @Test
     public void testWitch()
     {
-        NonEmptyString dog = NonEmptyString.parse("dog");
+        NonEmptyString dog = NonEmptyString.make("dog");
         Assert.assertTrue(new EmptyStrOrNonEmpty<>(dog).which(
             new EmptyStrOrCases<Boolean, NonEmptyString, RuntimeException>()
             {
@@ -74,7 +74,7 @@ public class EmptyStrOrNonEmptyTest
     @Test
     public void testToString()
     {
-        NonEmptyString dog = NonEmptyString.parse("dog");
+        NonEmptyString dog = NonEmptyString.make("dog");
         Assert.assertEquals("dog", new EmptyStrOrNonEmpty<>(dog).toString());
     }
 }

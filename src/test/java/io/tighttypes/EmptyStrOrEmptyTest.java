@@ -44,7 +44,7 @@ public class EmptyStrOrEmptyTest
     @Test
     public void testGetOrDefault()
     {
-        NonEmptyString dog = NonEmptyString.parse("dog");
+        NonEmptyString dog = NonEmptyString.make("dog");
         Assert.assertSame(dog, new EmptyStrOrEmpty<>().getOrDefault(dog));
     }
 

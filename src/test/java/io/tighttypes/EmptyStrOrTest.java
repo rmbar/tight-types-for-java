@@ -38,7 +38,7 @@ public class EmptyStrOrTest
     @Test
     public void testMake()
     {
-        NonEmptyString dog = NonEmptyString.parse("dog");
+        NonEmptyString dog = NonEmptyString.make("dog");
         Assert.assertTrue(EmptyStrOr.make(dog).isNonEmptyString());
     }
 }

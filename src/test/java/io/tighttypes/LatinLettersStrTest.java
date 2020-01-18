@@ -31,14 +31,14 @@ public class LatinLettersStrTest extends LatinLettersDigitsStrTest
     @Override
     LatinLettersStr make(String value)
     {
-        return LatinLettersStr.parse(value);
+        return LatinLettersStr.make(value);
     }
 
     @Override
     @Test(expected = IllegalArgumentException.class)
     public void testOne()
     {
-        LatinLettersStr.parse("1");
+        LatinLettersStr.make("1");
     }
 
     @Override

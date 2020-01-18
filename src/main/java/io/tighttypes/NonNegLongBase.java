@@ -29,13 +29,13 @@ abstract class NonNegLongBase implements NonNegLong
     @Override
     public boolean equals(Object other)
     {
-        return other != null && other instanceof NonNegLong && ((NonNegLong)other).equals(this);
+        return other instanceof NonNegLong && ((NonNegLong) other).equals(this);
     }
 
     @Override
     public int hashCode()
     {
-        long longValue = (toLong() % (long)Integer.MAX_VALUE);
+        long longValue = (toLong() % Integer.MAX_VALUE);
         return (int) longValue;
     }
 

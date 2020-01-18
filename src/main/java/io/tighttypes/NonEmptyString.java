@@ -30,26 +30,26 @@ package io.tighttypes;
 public interface NonEmptyString extends Comparable<NonEmptyString>
 {
     /**
-     * @return returns the same value as <code>toString().hashCode()</code>.
+     * @return returns the same value as {@code toString().hashCode()}.
      */
     int hashCode();
 
     /**
-     * Compares this string to the specified object.  The result is <code>true</code> if and only if the argument is
-     * not <code>null</code> and is a <code>NonEmptyString</code> object that represents the same sequence of characters
+     * Compares this string to the given  object. The result is {@code true} if and only if the argument is
+     * not {@code null} and is a {@code NonEmptyString} object that represents the same sequence of characters
      * as this object.
      *
-     * @param other the other object
-     * @return <code>true</code> if the strings are logically the same
+     * @param other the other object. may be {@code null}.
+     * @return {@code true} if the strings represent the same character content.
      */
     boolean equals(Object other);
 
     /**
-     * Compares this string to the specified string.  The result is <code>true</code> if and only if the argument is
-     * not <code>null</code> and represents the same sequence of characters as this object.
+     * Compares this string to the given  string. The result is {@code true} if and only if the argument is
+     * not {@code null} and represents the same sequence of characters as this object.
      *
-     * @param other the other object
-     * @return <code>true</code> if the strings are logically the same
+     * @param other the other object. may be {@code null}.
+     * @return {@code true} if the strings represent the same character content.
      */
     default boolean equals(NonEmptyString other)
     {
@@ -63,20 +63,18 @@ public interface NonEmptyString extends Comparable<NonEmptyString>
     }
 
     /**
-     * @return the value of the <code>NonEmptyString</code> in <code>String</code> form. Never returns
-     *         <code>null</code>.
+     * @return the value of this string in {@code String} form. never {@code null}.
      */
     String toString();
 
     /**
-     * Creates a new <code>NonEmptyString</code> from the given string.
+     * Creates a non-empty string from the given string.
      *
-     * @param value the characters of the <code>NonEmptyString</code>.
-     * @return the parsed value of <code>value</code>.
-     * @throws IllegalArgumentException if <code>value</code> has length zero.
-     * @throws NullPointerException if <code>value</code> is null.
+     * @param value the characters of the {@code NonEmptyString}. may not be {@code null}.
+     * @return the given value of in {@code NonEmptyString} form.
+     * @throws IllegalArgumentException if {@code value} has length zero.
      */
-    static NonEmptyString parse(String value)
+    static NonEmptyString make(String value)
     {
         if(value == null)
             throw new NullPointerException();

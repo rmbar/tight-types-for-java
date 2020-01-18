@@ -31,7 +31,7 @@ public class LatinLettersDigitsStrTest extends VisibleStringTest
     @Override
     LatinLettersDigitsStr make(String value)
     {
-        return LatinLettersDigitsStr.parse(value);
+        return LatinLettersDigitsStr.make(value);
     }
 
     @Test(expected = IllegalArgumentException.class)

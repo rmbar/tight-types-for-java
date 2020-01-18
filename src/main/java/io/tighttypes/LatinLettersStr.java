@@ -27,21 +27,20 @@ package io.tighttypes;
 /**
  * A non-empty string that is composed only of the characters A-Z and a-z.
  *
- * Formally, the Unicode code points of the characters of a <code>VisibleLatinLettersDigitsStr</code> may only be in
- * the inclusive ranges: [65-90] or [97-122].
+ * Formally, the Unicode code points of the characters of this string may only be in the inclusive ranges: [65-90] or
+ * [97-122].
  */
 public interface LatinLettersStr extends LatinLettersDigitsStr
 {
     /**
-     * Creates a new <code>LatinLettersStr</code> from the given value.
+     * Creates a new string from the given value.
      *
-     * @param value the value of the <code>LatinLettersStr</code>.
-     * @return a string composed of the characters of <code>value</code>
-     * @throws IllegalArgumentException if <code>value</code> is empty or contains a unicode character not in the ranges
+     * @param value the value of the {@code LatinLettersStr}. may not be {@code null}.
+     * @return a string composed of the characters of {@code value}. never {@code null}.
+     * @throws IllegalArgumentException if {@code value} is empty or contains a unicode character not in the ranges
      *                                  [65-90] or [97-122]
-     * @throws NullPointerException if value is <code>null</code>
      */
-    static LatinLettersStr parse(String value)
+    static LatinLettersStr make(String value)
     {
         if(value == null)
             throw new NullPointerException();

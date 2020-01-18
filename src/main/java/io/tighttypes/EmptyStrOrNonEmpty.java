@@ -25,21 +25,24 @@
 package io.tighttypes;
 
 /**
- * The non-empty case of <code>EmptyStrOr</code>
+ * An {@code EmptyStrOr<S>} with non-empty string content.
  */
 class EmptyStrOrNonEmpty<S extends NonEmptyString> implements EmptyStrOr<S>
 {
-    private final S _string;
+    private final S _innerString;
 
     EmptyStrOrNonEmpty(S string)
     {
-        _string = string;
+        if(string == null)
+            throw new NullPointerException("string");
+
+        _innerString = string;
     }
 
     @Override
     public <R, T extends Throwable> R which(EmptyStrOrCases<R, S, T> cases) throws T
     {
-        return cases.forNonEmpty(_string);
+        return cases.forNonEmpty(_innerString);
     }
 
     @Override
@@ -51,12 +54,12 @@ class EmptyStrOrNonEmpty<S extends NonEmptyString> implements EmptyStrOr<S>
     @Override
     public S getOrDefault(S defaultValue)
     {
-        return _string;
+        return _innerString;
     }
 
     @Override
     public String toString()
     {
-        return _string.toString();
+        return _innerString.toString();
     }
 }

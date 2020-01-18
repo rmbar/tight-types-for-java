@@ -32,7 +32,7 @@ public class NonEmptyStringTest
 {
     NonEmptyString make(String value)
     {
-        return NonEmptyString.parse(value);
+        return NonEmptyString.make(value);
     }
 
     @Test(expected = IllegalArgumentException.class)

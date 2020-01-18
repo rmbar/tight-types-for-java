@@ -25,11 +25,11 @@
 package io.tighttypes;
 
 /**
- * Two operations for the two possibles states of {@link EmptyStrOr}.  Used in conjunction with
+ * Two operations for the two possibles states of {@link EmptyStrOr}. Used in conjunction with
  * {@link EmptyStrOr#which(EmptyStrOrCases)}.
  *
  * @param <R> the result type of executing either operation
- * @param <S> the type of string the related {@link EmptyStrOr} may be in the non-empty case
+ * @param <S> the type of string the related {@link EmptyStrOr} is in the non-empty case
  * @param <T> the type of exception that may be thrown executing either operation
  */
 @SuppressWarnings("WeakerAccess") // product of package

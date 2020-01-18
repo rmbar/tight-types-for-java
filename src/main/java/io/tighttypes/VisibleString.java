@@ -25,20 +25,18 @@
 package io.tighttypes;
 
 /**
- * A string that is composed of at least one non-whitespace character (Unicode code point) as defined by
+ * A string that is composed of at least one non-whitespace Unicode code point as defined by
  * {@link Character#isWhitespace(int)}
  *
  */
 public interface VisibleString extends NonEmptyString
 {
-
     /**
-     * Creates as <code>VisibleString</code> from the given value.
+     * Creates a {@code VisibleString} from the given value.
      *
-     * @param value the value of the <code>VisibleString</code>.
-     * @return a string composed of the characters of <code>value</code>
-     * @throws IllegalArgumentException if <code>value</code> does not contain at least one non-whitespace character.
-     * @throws NullPointerException if <code>value</code> is <code>null</code>.
+     * @param value the value of the {@code VisibleString}. may not be {@code null}.
+     * @return a string composed of the characters of {@code value}. never {@code null}.
+     * @throws IllegalArgumentException if {@code value} does not contain at least one non-whitespace character.
      */
     static VisibleString make(String value)
     {

@@ -25,7 +25,7 @@
 package io.tighttypes;
 
 /**
- * The empty case of <code>EmptyStrOr</code>
+ * An {@code EmptyStrOr<S>} with empty string content.
  */
 class EmptyStrOrEmpty<S extends NonEmptyString> implements EmptyStrOr<S>
 {

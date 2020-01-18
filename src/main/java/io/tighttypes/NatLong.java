@@ -31,11 +31,11 @@ package io.tighttypes;
 public interface NatLong extends NonNegLong
 {
     /**
-     * Creates a new <code>NatLong</code> from the given value.
+     * Creates a new {@code NatLong} from the given value.
      *
-     * @param value the value of the <code>NatLong</code>.
+     * @param value the value of the {@code NatLong}.
      * @return the new number.
-     * @throws IllegalArgumentException if <code>value</code> is less than one.
+     * @throws IllegalArgumentException if {@code value} is less than one.
      */
     static NatLong make(long value)
     {
@@ -54,15 +54,19 @@ public interface NatLong extends NonNegLong
     }
 
     /**
-     * Creates a new <code>NonNegLong</code> from the given value.
+     * Creates a {@code NatLong} from the given string value.
      *
-     * @param value the value of the <code>NonNegLong</code>.
-     * @throws IllegalArgumentException if <code>value</code> is less than one.
-     * @return the parsed value of the string.
-     * @throws NumberFormatException if the string does not contain a parsable {@code long}.
+     * @param value the value of the {@code NatLong}. may not be {@code null}.
+     * @return the parsed value of the given string. never {@code null}.
+     * @throws NullPointerException if the given value is {@code null}.
+     * @throws NumberFormatException if the given string is not parsable into a {@code long}.
+     * @throws IllegalArgumentException if {@code value} is less than one.
      */
-    static NonNegLong parse(String value)
+    static NatLong parse(String value)
     {
+        if(value == null)
+            throw new NullPointerException("value");
+
         long longValue = Long.parseLong(value);
         return make(longValue);
     }

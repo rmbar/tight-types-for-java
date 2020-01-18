@@ -31,25 +31,25 @@ package io.tighttypes;
 public interface NonNegLong extends Comparable<NonNegLong>
 {
     /**
-     * @return the value of this object as a <code>long</code>.
+     * @return the value of this object as a {@code long}.
      */
     long toLong();
 
     /**
-     * Tests if <code>other</code> is a non-null instance of <code>NonNegLong</code> and also <code>other</code> represents
-     * the same number as this <code>NonNegLong</code>.
+     * Tests if {@code other} is a non-null instance of {@code NonNegLong} and also if {@code other} represents
+     * the same number as this {@code NonNegLong}.
      *
-     * @param other the value to test
-     * @return <code>true</code> if the two instances have the same numeric value and both are <code>NonNegLong</code>s.
+     * @param other the value to test. may be {@code null}.
+     * @return {@code true} if the two instances have the same numeric value and both are {@code NonNegLong}s.
      */
     @Override
     boolean equals(Object other);
 
     /**
-     * Tests if the <code>NonNegLong</code> and <code>other</code> represent the same number.
+     * Tests if the {@code NonNegLong} and {@code other} represent the same number.
      *
-     * @param other the value to test
-     * @return <code>true</code> if the two instances have the same numeric value.
+     * @param other the value to test. may be {@code null}.
+     * @return {@code true} if the two instances have the same numeric value.
      */
     default boolean equals(NonNegLong other)
     {
@@ -57,7 +57,7 @@ public interface NonNegLong extends Comparable<NonNegLong>
     }
 
     /**
-     * @return the numeric value of the integer modulus {@link Integer#MAX_VALUE}.
+     * @return the numeric value of this number modulus {@link Integer#MAX_VALUE}.
      */
     @Override
     int hashCode();
@@ -69,11 +69,11 @@ public interface NonNegLong extends Comparable<NonNegLong>
     }
 
     /**
-     * Creates a new <code>NonNegLong</code> from the given value.
+     * Creates a {@code NonNegLong} from the given value.
      *
-     * @param value the value of the <code>NonNegLong</code>.
+     * @param value the value of the {@code NonNegLong}.
      * @return the new number.
-     * @throws IllegalArgumentException if <code>value</code> is less than zero.
+     * @throws IllegalArgumentException if {@code value} is less than zero.
      */
     static NonNegLong make(long value)
     {
@@ -91,15 +91,19 @@ public interface NonNegLong extends Comparable<NonNegLong>
     }
 
     /**
-     * Creates a new <code>NonNegLong</code> from the given value.
+     * Creates a {@code NonNegLong} from the given string value.
      *
-     * @param value the value of the <code>NonNegLong</code>.
-     * @throws IllegalArgumentException if <code>value</code> is less than zero.
-     * @return the parsed value of the string
-     * @throws NumberFormatException if the string does not contain a parsable <code>long</code>.
+     * @param value the value of the {@code NonNegLong}. may not be {@code null}.
+     * @return the parsed value of the given string. never {@code null}.
+     * @throws NullPointerException if the given value is {@code null}.
+     * @throws NumberFormatException if the given string is not parsable into a {@code long}.
+     * @throws IllegalArgumentException if {@code value} is less than zero.
      */
     static NonNegLong parse(String value)
     {
+        if(value == null)
+            throw new NullPointerException("value");
+
         long longValue = Long.parseLong(value);
         return make(longValue);
     }

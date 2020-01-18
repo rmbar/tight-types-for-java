@@ -26,32 +26,32 @@ package io.tighttypes;
 
 class NonEmptyStringDefault implements NonEmptyString
 {
-    private final String _string;
+    private final String _innerString;
 
     NonEmptyStringDefault(String string)
     {
         if(string.length() == 0)
             throw new IllegalArgumentException("value may not be empty.");
 
-        _string = string;
+        _innerString = string;
     }
 
     @Override
     public int hashCode()
     {
-        return _string.hashCode();
+        return _innerString.hashCode();
     }
 
     @Override
     public boolean equals(Object other)
     {
-        return other != null && other instanceof NonEmptyString && ((NonEmptyString) other).equals(this);
+        return other instanceof NonEmptyString && ((NonEmptyString) other).equals(this);
 
     }
 
     @Override
     public String toString()
     {
-        return _string;
+        return _innerString;
     }
 }

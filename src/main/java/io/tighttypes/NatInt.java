@@ -30,11 +30,11 @@ package io.tighttypes;
 public interface NatInt extends NonNegInt
 {
     /**
-     * Creates a new <code>NatInt</code> from the given value.
+     * Creates a {@code NatInt} from the given value.
      *
-     * @param value the value of the <code>NatInt</code>.
-     * @return the new number.
-     * @throws IllegalArgumentException if <code>value</code> is less than one.
+     * @param value the numeric value of the {@code NatInt}.
+     * @return the natural number. never {@code null}.
+     * @throws IllegalArgumentException if {@code value} is less than one.
      */
     static NatInt make(int value)
     {
@@ -58,15 +58,19 @@ public interface NatInt extends NonNegInt
     }
 
     /**
-     * Creates a new <code>NonNegInt</code> from the given value.
+     * Creates a {@code NatInt} from the given string value.
      *
-     * @param value the value of the <code>NonNegInt</code>.
-     * @throws IllegalArgumentException if <code>value</code> is less than one.
-     * @return the parsed value of the string.
-     * @throws NumberFormatException if the string does not contain a parsable <code>int</code>.
+     * @param value the value of the {@code NatInt}. may not be {@code null}.
+     * @return the parsed value of the given string. never {@code null}.
+     * @throws NullPointerException if the given value is {@code null}.
+     * @throws NumberFormatException if the given string is not parsable into an {@code int}.
+     * @throws IllegalArgumentException if {@code value} is less than one.
      */
-    static NonNegInt parse(String value)
+    static NatInt parse(String value)
     {
+        if(value == null)
+            throw new NullPointerException("value");
+
         int intValue = Integer.parseInt(value);
         return make(intValue);
     }

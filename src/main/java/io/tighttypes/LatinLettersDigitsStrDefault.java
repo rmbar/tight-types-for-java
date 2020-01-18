@@ -43,7 +43,7 @@ class LatinLettersDigitsStrDefault extends NonEmptyStringDefault implements Visi
                 continue;
 
             throw new IllegalArgumentException("string may only be composed of A-Z, a-z, and 0-9 found " +
-                    string.charAt(i) + " at position " + i + " in " + string);
+                                                string.charAt(i) + " at position " + i + " in " + string);
         }
     }
 }
