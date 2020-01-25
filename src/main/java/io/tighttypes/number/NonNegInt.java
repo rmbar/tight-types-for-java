@@ -66,6 +66,29 @@ public interface NonNegInt extends NonNegLong
     }
 
     /**
+     * Returns the sum of this number and the given number.
+     *
+     * @param value the number to add to this number. may not be {@code null}.
+     * @return the sum of the two numbers. never {@code null}.
+     * @throws ArithmeticException if the result overflows a long.
+     */
+    default NonNegInt addUnchecked(NonNegInt value)
+    {
+        return make(Math.addExact(toInt(), value.toInt()));
+    }
+
+    /**
+     * Returns the difference of this number and the given number.  That is {@code (this - value)}.
+     *
+     * @param value the number to subtract from this number. may not be {@code null}.
+     * @return the difference of the two numbers. never {@code null}.
+     */
+    default int subtract(NonNegInt value)
+    {
+        return toInt() - value.toInt();
+    }
+
+    /**
      * Returns the difference of this number and the given number.  That is {@code (this - value)}.
      *
      * @param value the number to subtract from this number. may not be {@code null}.
@@ -93,19 +116,7 @@ public interface NonNegInt extends NonNegLong
      */
     default NonNegInt subtractUnchecked(NonNegInt value)
     {
-        return make(Math.subtractExact(toInt(), value.toInt()));
-    }
-
-    /**
-     * Returns the sum of this number and the given number.
-     *
-     * @param value the number to add to this number. may not be {@code null}.
-     * @return the sum of the two numbers. never {@code null}.
-     * @throws ArithmeticException if the result overflows a long.
-     */
-    default NonNegInt addUnchecked(NonNegInt value)
-    {
-        return make(Math.addExact(toInt(), value.toInt()));
+        return make(subtract(value));
     }
 
     /**

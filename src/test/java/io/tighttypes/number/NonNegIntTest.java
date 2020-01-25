@@ -88,6 +88,12 @@ public class NonNegIntTest extends NonNegCommonTests
         make(2).subtractChecked(make(3));
     }
 
+    @Test
+    public void testSubtract_Min_Max()
+    {
+       Assert.assertEquals((Integer.MAX_VALUE * -1), make(0).subtract(make(Integer.MAX_VALUE)));
+    }
+
     @Test(expected = InvalidArgumentException.class)
     public void testSubtractChecked_Max() throws InvalidArgumentException
     {

@@ -97,6 +97,12 @@ public class NatIntTest extends NonNegIntTest
         make(2).subtractChecked(make(2));
     }
 
+    @Test
+    public void testSubtract_Min_Max()
+    {
+        Assert.assertEquals((Integer.MAX_VALUE *-1+1), make(1).subtract(make(Integer.MAX_VALUE)));
+    }
+
     @Test(expected = InvalidArgumentException.class)
     @Override
     public void testSubtractChecked_Max() throws InvalidArgumentException
