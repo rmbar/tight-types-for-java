@@ -31,7 +31,6 @@ import java.math.BigInteger;
 
 public class BigIntTest extends NumberCommonTests
 {
-    @Override
     BigInt make(int number)
     {
         return BigInt.make(BigInteger.valueOf(number));
@@ -41,6 +40,12 @@ public class BigIntTest extends NumberCommonTests
     public void testMake_null()
     {
         BigInt.make(null);
+    }
+
+    @Test
+    public void testMake_maxLong()
+    {
+        Assert.assertEquals(BigInteger.valueOf(Long.MAX_VALUE), BigInt.make(Long.MAX_VALUE).toBigInteger());
     }
 
     @Override

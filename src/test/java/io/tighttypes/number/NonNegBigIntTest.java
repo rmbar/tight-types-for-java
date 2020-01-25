@@ -37,6 +37,12 @@ public class NonNegBigIntTest extends NonNegCommonTests
         return NonNegBigInt.make(BigInteger.valueOf(number));
     }
 
+    @Test
+    public void testMake_maxLong()
+    {
+        Assert.assertEquals(BigInteger.valueOf(Long.MAX_VALUE), NonNegBigInt.make(Long.MAX_VALUE).toBigInteger());
+    }
+
     @Test(expected = NullPointerException.class)
     public void testMake_null()
     {

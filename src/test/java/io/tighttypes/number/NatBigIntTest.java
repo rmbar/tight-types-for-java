@@ -43,6 +43,12 @@ public class NatBigIntTest extends NumberCommonTests
         return NatBigInt.make(new BigInteger(value));
     }
 
+    @Test
+    public void testMake_maxLong()
+    {
+        Assert.assertEquals(BigInteger.valueOf(Long.MAX_VALUE), NatBigInt.make(Long.MAX_VALUE).toBigInteger());
+    }
+
     @Test(expected = NullPointerException.class)
     public void make_null()
     {

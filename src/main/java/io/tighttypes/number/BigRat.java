@@ -25,6 +25,7 @@
 package io.tighttypes.number;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * An immutable arbitrary-precision rational number.
@@ -130,5 +131,16 @@ public interface BigRat extends Comparable<BigRat>
                 return value;
             }
         };
+    }
+
+    /**
+     * Returns a {@code BigRat} with the same value as the given {@code long}.
+     *
+     * @param value the value of the number to be returned.
+     * @return a {@code BigRat} with the same value as the given {@code long}. never {@code null}.
+     */
+    static BigRat make(long value)
+    {
+        return make(BigDecimal.valueOf(value));
     }
 }

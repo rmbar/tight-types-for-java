@@ -74,4 +74,16 @@ public interface NatBigInt extends NonNegBigInt
             }
         };
     }
+
+    /**
+     * Returns a {@code NatBigInt} with the same value as the given {@code long}.
+     *
+     * @param value the value of the number to be returned.
+     * @return a {@code NatBigInt} with the same value as the given {@code long}. never {@code null}.
+     * @throws IllegalArgumentException if {@code value < 1}.
+     */
+    static NatBigInt make(long value)
+    {
+        return make(BigInteger.valueOf(value));
+    }
 }

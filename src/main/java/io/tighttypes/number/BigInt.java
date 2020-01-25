@@ -93,4 +93,15 @@ public interface BigInt extends BigRat
             }
         };
     }
+
+    /**
+     * Returns a {@code BigInt} with the same value as the given {@code long}.
+     *
+     * @param value the value of the number to be returned.
+     * @return a {@code BigInt} with the same value as the given {@code long}. never {@code null}.
+     */
+    static BigInt make(long value)
+    {
+        return make(BigInteger.valueOf(value));
+    }
 }

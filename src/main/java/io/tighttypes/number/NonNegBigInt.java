@@ -75,4 +75,16 @@ public interface NonNegBigInt extends BigInt
         };
     }
 
+    /**
+     * Returns a {@code NonNegBigInt} with the same value as the given {@code long}.
+     *
+     * @param value the value of the number to be returned.
+     * @return a {@code NonNegBigInt} with the same value as the given {@code long}. never {@code null}.
+     * @throws IllegalArgumentException if {@code value < 0}.
+     */
+    static NonNegBigInt make(long value)
+    {
+        return make(BigInteger.valueOf(value));
+    }
+
 }

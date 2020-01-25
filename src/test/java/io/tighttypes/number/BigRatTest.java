@@ -24,9 +24,11 @@
 
 package io.tighttypes.number;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class BigRatTest extends NumberCommonTests
 {
@@ -34,6 +36,12 @@ public class BigRatTest extends NumberCommonTests
     BigRat make(int number)
     {
         return BigRat.make(BigDecimal.valueOf(number));
+    }
+
+    @Test
+    public void testMake_maxLong()
+    {
+        Assert.assertEquals(BigDecimal.valueOf(Long.MAX_VALUE), BigRat.make(Long.MAX_VALUE).toBigDecimal());
     }
 
     @Test(expected = NullPointerException.class)
