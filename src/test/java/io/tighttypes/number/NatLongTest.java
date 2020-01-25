@@ -30,13 +30,13 @@ import org.junit.Test;
 public class NatLongTest extends NonNegLongTest
 {
     @Override
-    NatLong make(long value)
+    public NatLong make(long value)
     {
         return NatLong.make(value);
     }
 
     @Override
-    public NonNegLong make(byte number)
+    public NatLong make(int number)
     {
         return make((long)number);
     }
@@ -77,4 +77,47 @@ public class NatLongTest extends NonNegLongTest
     {
         NatLong.parse("-1");
     }
+
+    @Test
+    public void testAdd_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).add(make(2)));
+    }
+
+    @Test
+    public void testAddChecked_2_2() throws OverflowException
+    {
+        Assert.assertEquals(make(4), make(2).addChecked(make(2)));
+    }
+
+    @Test
+    public void testAddUnchecked_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).addUnchecked(make(2)));
+    }
+
+    @Test
+    public void testSubtractChecked_2_1() throws InvalidArgumentException
+    {
+        Assert.assertEquals(make(1), make(2).subtractChecked(make(1)));
+    }
+
+    @Test(expected = InvalidArgumentException.class)
+    public void testSubtractChecked_2_2() throws InvalidArgumentException
+    {
+        make(2).subtractChecked(make(2));
+    }
+
+    @Test
+    public void testSubtractUnchecked_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).addUnchecked(make(2)));
+    }
+
+    @Test(expected = OverflowException.class)
+    public void testAdd_overflow() throws OverflowException
+    {
+        make(1).addChecked(NatLong.make(Long.MAX_VALUE));
+    }
+
 }

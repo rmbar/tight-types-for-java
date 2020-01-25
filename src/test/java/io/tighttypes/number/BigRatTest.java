@@ -24,6 +24,27 @@
 
 package io.tighttypes.number;
 
-abstract class NonNegLongBase extends BigIntBase implements NonNegLong
+import org.junit.Test;
+
+import java.math.BigDecimal;
+
+public class BigRatTest extends NumberCommonTests
 {
+    @Override
+    BigRat make(int number)
+    {
+        return BigRat.make(BigDecimal.valueOf(number));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testMake_null()
+    {
+        BigRat.make(null);
+    }
+
+    @Override
+    BigRat parse(String value)
+    {
+        return BigRat.make(new BigDecimal(value));
+    }
 }

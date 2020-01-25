@@ -30,15 +30,9 @@ import org.junit.Test;
 public class NatIntTest extends NonNegIntTest
 {
     @Override
-    NatInt make(int value)
+    public NatInt make(int value)
     {
         return NatInt.make(value);
-    }
-
-    @Override
-    public NonNegLong make(byte number)
-    {
-        return make((int)number);
     }
 
     @Override
@@ -65,6 +59,61 @@ public class NatIntTest extends NonNegIntTest
     public void testZeroTLong()
     {
         Assert.assertEquals(0, make(0).toLong());
+    }
+
+    @Test
+    public void testAdd_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).add(make(2)));
+    }
+
+    @Test
+    public void testAddChecked_2_2() throws OverflowException
+    {
+        Assert.assertEquals(make(4), make(2).addChecked(make(2)));
+    }
+
+    @Test(expected = OverflowException.class)
+    public void testAddChecked_2_Max() throws OverflowException
+    {
+        make(2).addChecked(make(Integer.MAX_VALUE));
+    }
+
+    @Test
+    public void testAddUnchecked_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).addUnchecked(make(2)));
+    }
+
+    @Test
+    public void testSubtractChecked_2_1() throws InvalidArgumentException
+    {
+        Assert.assertEquals(make(1), make(2).subtractChecked(make(1)));
+    }
+
+    @Test(expected = InvalidArgumentException.class)
+    public void testSubtractChecked_2_2() throws InvalidArgumentException
+    {
+        make(2).subtractChecked(make(2));
+    }
+
+    @Test(expected = InvalidArgumentException.class)
+    @Override
+    public void testSubtractChecked_Max() throws InvalidArgumentException
+    {
+        make(1).subtractChecked(make(Integer.MAX_VALUE));
+    }
+
+    @Test
+    public void testSubtractUnchecked_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).addUnchecked(make(2)));
+    }
+
+    @Test(expected = OverflowException.class)
+    public void testAdd_overflow() throws OverflowException
+    {
+        make(1).addChecked(NonNegInt.make(Integer.MAX_VALUE));
     }
 
 }

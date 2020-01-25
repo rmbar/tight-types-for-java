@@ -24,6 +24,9 @@
 
 package io.tighttypes.number;
 
-abstract class NonNegLongBase extends BigIntBase implements NonNegLong
+/**
+ * Thrown to indicate an argument provided to a method is invalid.
+ */
+public class InvalidArgumentException extends Exception
 {
 }

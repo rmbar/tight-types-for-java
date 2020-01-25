@@ -27,53 +27,45 @@ package io.tighttypes.number;
 import org.junit.Assert;
 import org.junit.Test;
 
-public abstract class IntegerCommonTests
-{
-    abstract NonNegLong make(byte number);
+import java.math.BigDecimal;
 
-    abstract NonNegLong parse(String value);
+public abstract class NumberCommonTests
+{
+    abstract BigRat make(int number);
+
+    abstract BigRat parse(String value);
 
     @Test
     public void testEqualsSame()
     {
-        Assert.assertTrue(make((byte)1).equals(make((byte)1)));
+        Assert.assertTrue(make(1).equals(make(1)));
     }
 
     @Test
     public void testEqualsSameErased()
     {
-        Assert.assertEquals(make((byte) 1), make((byte) 1));
+        Assert.assertEquals(make(1), (Object)make(1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testNeg10()
-    {
-        make((byte)-10);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testNeg1()
-    {
-        make((byte)-1);
-    }
 
     @Test
     public void testOne()
     {
-        Assert.assertEquals(1, make((byte) 1).toLong());
-    }
-
-    @Test
-    public void testParseZero()
-    {
-        Assert.assertEquals(0, parse("0").toLong());
+        Assert.assertEquals(BigDecimal.ONE, make(1).toBigDecimal());
     }
 
     @Test
     public void testParseOne()
     {
-        Assert.assertEquals(1, parse("1").toLong());
+        Assert.assertEquals(BigDecimal.ONE, parse("1").toBigDecimal());
     }
+
+    @Test(expected = NullPointerException.class)
+    public void testParseNull()
+    {
+        parse(null);
+    }
+
 
     @Test(expected = NumberFormatException.class)
     public void testParseEmpty()
@@ -81,52 +73,77 @@ public abstract class IntegerCommonTests
         parse("");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testParseNeg1()
-    {
-        parse("-1");
-    }
-
     @Test
     public void testEqualsString()
     {
         // not a bug, what we are testing for
-        Assert.assertNotEquals("1", make((byte) 1));
+        Assert.assertNotEquals("1", make( 1));
     }
 
     @Test
     public void testEqualsDifferent()
     {
-        Assert.assertFalse(make((byte)1).equals(make((byte)2)));
+        Assert.assertFalse(make(1).equals(make(2)));
     }
 
     @Test
     public void testHashCode3()
     {
-        Assert.assertEquals(3, make((byte)3).hashCode());
+        Assert.assertEquals(3, make(3).hashCode());
     }
 
     @Test
     public void testToStringNonNull()
     {
-        Assert.assertNotNull(make((byte)3).toString());
+        Assert.assertNotNull(make(3).toString());
     }
 
     @Test
     public void testCompare1()
     {
-        Assert.assertEquals(0, make((byte)1).compareTo(make((byte)1)));
+        Assert.assertEquals(0, make(1).compareTo(make(1)));
     }
 
     @Test
     public void testCompare2()
     {
-        Assert.assertEquals(1, make((byte)2).compareTo(make((byte)1)));
+        Assert.assertEquals(1, make(2).compareTo(make(1)));
     }
 
     @Test
     public void testCompare3()
     {
-        Assert.assertEquals(-1, make((byte)1).compareTo(make((byte)2)));
+        Assert.assertEquals(-1, make(1).compareTo(make(2)));
+    }
+
+    @Test
+    public void testAdd_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).add(make(2)));
+    }
+
+    @Test
+    public void testSubtract_2_2()
+    {
+        Assert.assertEquals(make(1), make(2).subtract(make(1)));
+    }
+
+    @Test
+    public void testHashIntMax()
+    {
+        Assert.assertEquals(new BigDecimal(Integer.MAX_VALUE).toBigInteger().hashCode(),
+                            make(Integer.MAX_VALUE).hashCode());
+    }
+
+    @Test
+    public void testAbs()
+    {
+        Assert.assertEquals(make(1), make(1).abs());
+    }
+
+    @Test
+    public void testDistanceTo()
+    {
+        Assert.assertEquals(make(4), make(1).distanceTo(make(5)));
     }
 }

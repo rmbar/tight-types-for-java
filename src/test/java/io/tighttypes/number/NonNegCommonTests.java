@@ -26,11 +26,31 @@ package io.tighttypes.number;
 import org.junit.Assert;
 import org.junit.Test;
 
-public abstract class NonNegCommonTests extends IntegerCommonTests
+import java.math.BigDecimal;
+
+public abstract class NonNegCommonTests extends NumberCommonTests
 {
     @Test
     public void testZero()
     {
-        Assert.assertEquals(0, make((byte) 0).toLong());
+        Assert.assertEquals(BigDecimal.ZERO, make(0).toBigDecimal());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNeg10()
+    {
+        make(-10);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNeg1()
+    {
+        make((byte)-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testParseNeg1()
+    {
+        parse("-1");
     }
 }

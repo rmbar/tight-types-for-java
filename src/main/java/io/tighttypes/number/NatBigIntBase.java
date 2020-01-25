@@ -24,6 +24,6 @@
 
 package io.tighttypes.number;
 
-abstract class NonNegLongBase extends BigIntBase implements NonNegLong
+abstract class NatBigIntBase extends NonNegBigIntBase implements NatBigInt
 {
 }

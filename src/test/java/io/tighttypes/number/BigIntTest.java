@@ -24,6 +24,46 @@
 
 package io.tighttypes.number;
 
-abstract class NonNegLongBase extends BigIntBase implements NonNegLong
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.math.BigInteger;
+
+public class BigIntTest extends NumberCommonTests
 {
+    @Override
+    BigInt make(int number)
+    {
+        return BigInt.make(BigInteger.valueOf(number));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testMake_null()
+    {
+        BigInt.make(null);
+    }
+
+    @Override
+    BigInt parse(String value)
+    {
+        return BigInt.make(new BigInteger(value));
+    }
+
+    @Test
+    public void testAdd_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).add(make(2)));
+    }
+
+    @Test
+    public void testAbs_Neg1()
+    {
+        Assert.assertEquals(make(1), make(-1).abs());
+    }
+
+    @Test
+    public void testSubtract()
+    {
+        Assert.assertEquals(make(0), make(2).subtract(make(2)));
+    }
 }
