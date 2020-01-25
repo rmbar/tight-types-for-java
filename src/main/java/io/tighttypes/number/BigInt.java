@@ -68,9 +68,9 @@ public interface BigInt extends BigRat
     /**
      * @return the absolute value of this number. never {@code null}.
      */
-    default BigInt abs()
+    default NonNegBigInt abs()
     {
-        return make(toBigInteger().abs());
+        return NonNegBigInt.make(toBigInteger().abs());
     }
 
     /**
