@@ -146,4 +146,28 @@ public abstract class NumberCommonTests
     {
         Assert.assertEquals(make(4), make(1).distanceTo(make(5)));
     }
+
+    @Test
+    public void testIs_1_in_1_2_3()
+    {
+        Assert.assertTrue(make(1).is(1, 2, 3));
+    }
+
+    @Test
+    public void testIs_2_in_1_2_3()
+    {
+        Assert.assertTrue(make(2).is(1, 2, 3));
+    }
+
+    @Test
+    public void testIs_3_in_1_2_3()
+    {
+        Assert.assertTrue(make(3).is(1, 2, 3));
+    }
+
+    @Test
+    public void testIs_5_in_1_2_3()
+    {
+        Assert.assertFalse(make(5).is(1, 2, 3));
+    }
 }

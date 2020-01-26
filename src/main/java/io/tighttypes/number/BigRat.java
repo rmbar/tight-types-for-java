@@ -79,6 +79,51 @@ public interface BigRat extends Comparable<BigRat>
     }
 
     /**
+     * Returns {@code true} if any of the given numbers have the same value as this number. Otherwise {@code false}.
+     *
+     * @param candidates the given numbers. may not be {@code null}.
+     * @return {@code true} if any of the given numbers have the same value as this number. Otherwise {@code false}.
+     */
+    default boolean is(BigRat... candidates)
+    {
+        for(BigRat candidate : candidates)
+            if(candidate.equals(this))
+                return true;
+
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if any of the given numbers have the same value as this number. Otherwise {@code false}.
+     *
+     * @param candidates the given numbers. may not be {@code null}.
+     * @return {@code true} if any of the given numbers have the same value as this number. Otherwise {@code false}.
+     */
+    default boolean is(double... candidates)
+    {
+        for(double candidate : candidates)
+            if(make(candidate).equals(this))
+                return true;
+
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if any of the given numbers have the same value as this number. Otherwise {@code false}.
+     *
+     * @param candidates the given numbers. may not be {@code null}.
+     * @return {@code true} if any of the given numbers have the same value as this number. Otherwise {@code false}.
+     */
+    default boolean is(long... candidates)
+    {
+        for(long candidate : candidates)
+            if(make(candidate).equals(this))
+                return true;
+
+        return false;
+    }
+
+    /**
      * Tests if {@code other} is a non-null instance of {@code BigRational} and also if {@code other} represents
      * the same number as this {@code BigInt}.
      *
@@ -140,6 +185,17 @@ public interface BigRat extends Comparable<BigRat>
      * @return a {@code BigRat} with the same value as the given {@code long}. never {@code null}.
      */
     static BigRat make(long value)
+    {
+        return make(BigDecimal.valueOf(value));
+    }
+
+    /**
+     * Returns a {@code BigRat} with the same value as the given {@code double}.
+     *
+     * @param value the value of the number to be returned.
+     * @return a {@code BigRat} with the same value as the given {@code double}. never {@code null}.
+     */
+    static BigRat make(double value)
     {
         return make(BigDecimal.valueOf(value));
     }

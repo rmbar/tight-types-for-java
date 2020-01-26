@@ -55,4 +55,52 @@ public class BigRatTest extends NumberCommonTests
     {
         return BigRat.make(new BigDecimal(value));
     }
+
+    @Test
+    public void testIs_1_in_1_2_3_double()
+    {
+        Assert.assertTrue(BigRat.make(1).is(1.0, 2.0, 3.0));
+    }
+
+    @Test
+    public void testIs_2_in_1_2_3_double()
+    {
+        Assert.assertTrue(BigRat.make(2).is(1.0, 2.0, 3.0));
+    }
+
+    @Test
+    public void testIs_3_in_1_2_3_double()
+    {
+        Assert.assertTrue(BigRat.make(3).is(1.0, 2.0, 3.0));
+    }
+
+    @Test
+    public void testIs_5_in_1_2_3_double()
+    {
+        Assert.assertFalse(BigRat.make(5).is(1.0, 2.0, 3.0));
+    }
+
+    @Test
+    public void testIs_1_in_1_2_3_BigRat()
+    {
+        Assert.assertTrue(BigRat.make(1).is(BigRat.make(1.0), BigRat.make(2.0), BigRat.make(3.0)));
+    }
+
+    @Test
+    public void testIs_2_in_1_2_3_BigRat()
+    {
+        Assert.assertTrue(BigRat.make(2).is(BigRat.make(1.0), BigRat.make(2.0), BigRat.make(3.0)));
+    }
+
+    @Test
+    public void testIs_3_in_1_2_3_BigRat()
+    {
+        Assert.assertTrue(BigRat.make(3).is(BigRat.make(1.0), BigRat.make(2.0), BigRat.make(3.0)));
+    }
+
+    @Test
+    public void testIs_5_in_1_2_3_BigRat()
+    {
+        Assert.assertFalse(BigRat.make(5).is(BigRat.make(1.0), BigRat.make(2.0), BigRat.make(3.0)));
+    }
 }
