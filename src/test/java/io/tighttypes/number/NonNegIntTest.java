@@ -35,12 +35,6 @@ public class NonNegIntTest extends NonNegCommonTests
     }
 
     @Override
-    public NonNegLong make(byte number)
-    {
-        return make((int)number);
-    }
-
-    @Override
     public NonNegLong parse(String value)
     {
         return NonNegInt.parse(value);
@@ -63,5 +57,61 @@ public class NonNegIntTest extends NonNegCommonTests
     {
         Assert.assertEquals(Integer.MAX_VALUE, make(Integer.MAX_VALUE).toInt());
     }
+
+    @Test
+    public void testAdd_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).add(make(2)));
+    }
+
+    @Test
+    public void testAddChecked_2_2() throws OverflowException
+    {
+        Assert.assertEquals(make(4), make(2).addChecked(make(2)));
+    }
+
+    @Test
+    public void testAddUnchecked_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).addUnchecked(make(2)));
+    }
+
+    @Test
+    public void testSubtractChecked_2_2() throws InvalidArgumentException
+    {
+        Assert.assertEquals(make(1), make(2).subtractChecked(make(1)));
+    }
+
+    @Test(expected = InvalidArgumentException.class)
+    public void testSubtractChecked_2_3() throws InvalidArgumentException
+    {
+        make(2).subtractChecked(make(3));
+    }
+
+    @Test
+    public void testSubtract_Min_Max()
+    {
+       Assert.assertEquals((Integer.MAX_VALUE * -1), make(0).subtract(make(Integer.MAX_VALUE)));
+    }
+
+    @Test(expected = InvalidArgumentException.class)
+    public void testSubtractChecked_Max() throws InvalidArgumentException
+    {
+        make(0).subtractChecked(make(Integer.MAX_VALUE));
+    }
+
+
+    @Test
+    public void testSubtractUnchecked_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).addUnchecked(make(2)));
+    }
+
+    @Test(expected = OverflowException.class)
+    public void testAdd_overflow() throws OverflowException
+    {
+        make(1).addChecked(NonNegInt.make(Integer.MAX_VALUE));
+    }
+
 
 }

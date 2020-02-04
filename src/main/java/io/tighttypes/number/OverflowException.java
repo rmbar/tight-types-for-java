@@ -24,6 +24,9 @@
 
 package io.tighttypes.number;
 
-abstract class NonNegLongBase extends BigIntBase implements NonNegLong
+/**
+ * Thrown to indicate the operation could not proceed to numeric overflow.
+ */
+public class OverflowException extends Exception
 {
 }

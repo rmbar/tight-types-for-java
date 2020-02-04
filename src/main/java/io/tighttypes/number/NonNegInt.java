@@ -36,6 +36,90 @@ public interface NonNegInt extends NonNegLong
     int toInt();
 
     /**
+     * Returns the sum of this number and the given number.
+     *
+     * @param value the number to add to this number. may not be {@code null}.
+     * @return the sum of the two numbers. never {@code null}.
+     */
+    default NonNegBigInt add(NonNegInt value)
+    {
+        return NatBigInt.make(toBigInteger().add(value.toBigInteger()));
+    }
+
+    /**
+     * Returns the sum of this number and the given number.
+     *
+     * @param value the number to add to this number. may not be {@code null}.
+     * @return the sum of the two numbers. never {@code null}.
+     * @throws OverflowException if the result overflows a long.
+     */
+    default NonNegInt addChecked(NonNegInt value) throws OverflowException
+    {
+        try
+        {
+            return addUnchecked(value);
+        }
+        catch (ArithmeticException e)
+        {
+            throw new OverflowException();
+        }
+    }
+
+    /**
+     * Returns the sum of this number and the given number.
+     *
+     * @param value the number to add to this number. may not be {@code null}.
+     * @return the sum of the two numbers. never {@code null}.
+     * @throws ArithmeticException if the result overflows a long.
+     */
+    default NonNegInt addUnchecked(NonNegInt value)
+    {
+        return make(Math.addExact(toInt(), value.toInt()));
+    }
+
+    /**
+     * Returns the difference of this number and the given number.  That is {@code (this - value)}.
+     *
+     * @param value the number to subtract from this number. may not be {@code null}.
+     * @return the difference of the two numbers. never {@code null}.
+     */
+    default int subtract(NonNegInt value)
+    {
+        return toInt() - value.toInt();
+    }
+
+    /**
+     * Returns the difference of this number and the given number.  That is {@code (this - value)}.
+     *
+     * @param value the number to subtract from this number. may not be {@code null}.
+     * @return the difference of the two numbers. never {@code null}.
+     * @throws InvalidArgumentException if the result overflows a long.
+     */
+    default NonNegInt subtractChecked(NonNegInt value) throws InvalidArgumentException
+    {
+        try
+        {
+            return subtractUnchecked(value);
+        }
+        catch (IllegalArgumentException e)
+        {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    /**
+     * Returns the difference of this number and the given number.  That is {@code (this - value)}.
+     *
+     * @param value the number to subtract from this number. may not be {@code null}.
+     * @return the difference of the two numbers. never {@code null}.
+     * @throws IllegalArgumentException if the resulting difference is less than zero.
+     */
+    default NonNegInt subtractUnchecked(NonNegInt value)
+    {
+        return make(subtract(value));
+    }
+
+    /**
      * Creates a new {@code NonNegInt} from the given value.
      *
      * @param value the value of the {@code NonNegInt}.

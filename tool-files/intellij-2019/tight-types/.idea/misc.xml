@@ -6,6 +6,9 @@
     <pattern value="io.tighttypes.EmptyStrOr" method="which" />
     <pattern value="io.tighttypes.EmptyStrOr" method="getOrDefault" />
     <pattern value="io.tighttypes.EmptyStrOr" method="toString" />
+    <pattern value="io.tighttypes.string.EmptyStrOr" />
+    <pattern value="io.tighttypes.string.EmptyStrOr" method="getOrDefault" />
+    <pattern value="io.tighttypes.string.EmptyStrOr" method="which" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="JDK 1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

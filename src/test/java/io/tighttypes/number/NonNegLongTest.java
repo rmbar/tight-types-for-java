@@ -29,13 +29,13 @@ import org.junit.Test;
 
 public class NonNegLongTest extends NonNegCommonTests
 {
-    NonNegLong make(long value)
+    public NonNegLong make(long value)
     {
         return NonNegLong.make(value);
     }
 
     @Override
-    public NonNegLong make(byte number)
+    NonNegLong make(int number)
     {
         return make((long)number);
     }
@@ -53,12 +53,50 @@ public class NonNegLongTest extends NonNegCommonTests
     }
 
     @Test
-    public void testHashIntMaxPlusOne()
+    public void testAdd_2_2()
     {
-        long value = Integer.MAX_VALUE;
-        value++;
-        Assert.assertEquals(1, make(value).hashCode());
+        Assert.assertEquals(make(4), make(2).add(make(2)));
     }
 
+    @Test
+    public void testAddChecked_2_2() throws OverflowException
+    {
+        Assert.assertEquals(make(4), make(2).addChecked(make(2)));
+    }
 
+    @Test
+    public void testAddUnchecked_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).addUnchecked(make(2)));
+    }
+
+    @Test
+    public void testSubtractChecked_2_2() throws InvalidArgumentException
+    {
+        Assert.assertEquals(make(1), make(2).subtractChecked(make(1)));
+    }
+
+    @Test(expected = InvalidArgumentException.class)
+    public void testSubtractChecked_1_2() throws InvalidArgumentException
+    {
+        make(1).subtractChecked(make(2));
+    }
+
+    @Test
+    public void testSubtractUnchecked_2_2()
+    {
+        Assert.assertEquals(make(4), make(2).addUnchecked(make(2)));
+    }
+
+    @Test(expected = OverflowException.class)
+    public void testAdd_overflow() throws OverflowException
+    {
+        make(1).addChecked(NonNegLong.make(Long.MAX_VALUE));
+    }
+
+    @Test
+    public void testDistanceTo_2_4()
+    {
+        Assert.assertEquals(make(2), make(2).distanceTo(make(4)));
+    }
 }

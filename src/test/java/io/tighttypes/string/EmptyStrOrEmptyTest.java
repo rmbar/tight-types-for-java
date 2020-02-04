@@ -56,6 +56,12 @@ import org.junit.Test;
 
 public class EmptyStrOrEmptyTest
 {
+    @Test(expected = NullPointerException.class)
+    public void testMakeNull()
+    {
+        EmptyStrOr.make(null);
+    }
+
     @Test
     public void testIsEmptyString()
     {

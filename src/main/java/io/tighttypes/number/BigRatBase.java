@@ -24,6 +24,23 @@
 
 package io.tighttypes.number;
 
-abstract class NonNegLongBase extends BigIntBase implements NonNegLong
+abstract class BigRatBase implements BigRat
 {
+    @Override
+    public boolean equals(Object other)
+    {
+        return other instanceof BigRat && ((BigRat) other).equals(this);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return toBigDecimal().toBigInteger().hashCode();
+    }
+
+    @Override
+    public String toString()
+    {
+        return toBigDecimal().toString();
+    }
 }

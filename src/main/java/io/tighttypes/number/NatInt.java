@@ -30,6 +30,79 @@ package io.tighttypes.number;
 public interface NatInt extends NonNegInt
 {
     /**
+     * Returns the sum of this number and the given number.
+     *
+     * @param value the number to add to this number. may not be {@code null}.
+     * @return the sum of the two numbers. never {@code null}.
+     */
+    default NatBigInt add(NatInt value)
+    {
+        return NatBigInt.make(toBigInteger().add(value.toBigInteger()));
+    }
+
+    /**
+     * Returns the sum of this number and the given number.
+     *
+     * @param value the number to add to this number. may not be {@code null}.
+     * @return the sum of the two numbers. never {@code null}.
+     * @throws OverflowException if the result overflows a long.
+     */
+    default NatInt addChecked(NatInt value) throws OverflowException
+    {
+        try
+        {
+            return addUnchecked(value);
+        }
+        catch (ArithmeticException e)
+        {
+            throw new OverflowException();
+        }
+    }
+
+    /**
+     * Returns the sum of this number and the given number.
+     *
+     * @param value the number to add to this number. may not be {@code null}.
+     * @return the sum of the two numbers. never {@code null}.
+     * @throws ArithmeticException if the result overflows a long.
+     */
+    default NatInt addUnchecked(NatInt value)
+    {
+        return make(Math.addExact(toInt(), value.toInt()));
+    }
+
+    /**
+     * Returns the difference of this number and the given number.  That is {@code (this - value)}.
+     *
+     * @param value the number to subtract from this number. may not be {@code null}.
+     * @return the difference of the two numbers. never {@code null}.
+     * @throws InvalidArgumentException if the result overflows a long.
+     */
+    default NatInt subtractChecked(NatInt value) throws InvalidArgumentException
+    {
+        try
+        {
+            return subtractUnchecked(value);
+        }
+        catch (IllegalArgumentException e)
+        {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    /**
+     * Returns the difference of this number and the given number.  That is {@code (this - value)}.
+     *
+     * @param value the number to subtract from this number. may not be {@code null}.
+     * @return the difference of the two numbers. never {@code null}.
+     * @throws IllegalArgumentException if the resulting difference is less than zero.
+     */
+    default NatInt subtractUnchecked(NatInt value)
+    {
+        return make(Math.subtractExact(toInt(), value.toInt()));
+    }
+
+    /**
      * Creates a {@code NatInt} from the given value.
      *
      * @param value the numeric value of the {@code NatInt}.
