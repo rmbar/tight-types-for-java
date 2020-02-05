@@ -80,7 +80,7 @@ public class NonEmptyStringTest
 {
     NonEmptyString make(String value)
     {
-        return NonEmptyString.make(value);
+        return new NonEmptyString(value);
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -58,8 +58,34 @@ package io.github.rmbar.tight_types.string;
  * @param <S> the type of the inner string that may be encapsulated by this wrapper if the wrapper is in the non-empty
  *           state.
  */
-public interface EmptyStrOr<S extends NonEmptyString>
+public class EmptyStrOr<S extends NonEmptyString>
 {
+    /**
+     * {@code null} if the string represents the empty string, otherwise the string content of the outer string.
+     */
+    private final S _innerString;
+
+    /**
+     * Creates a new string with an empty string as the inner value.
+     */
+    public EmptyStrOr()
+    {
+        _innerString = null;
+    }
+
+    /**
+     * Creates a new string with the given string as the inner value.
+     *
+     * @param innerString the string value the constructed string represents. may not be {@code null}.
+     */
+    public EmptyStrOr(S innerString)
+    {
+        if(innerString == null)
+            throw new NullPointerException("innerString");
+
+        _innerString = innerString;
+    }
+
     /**
      * Performs one of two operations (both encapsulated in {@code cases}) depending on whether this string
      * is empty or not.
@@ -73,17 +99,26 @@ public interface EmptyStrOr<S extends NonEmptyString>
      * @return the result of performing one of the two given operations.
      * @throws T if there is an exception while performing the operation.
      */
-    <R, T extends Throwable> R which(EmptyStrOrCases<R, S, T> cases) throws T;
+    public final <R, T extends Throwable> R which(EmptyStrOrCases<R, S, T> cases) throws T
+    {
+        if(_innerString == null)
+            return cases.forEmpty();
+
+        return cases.forNonEmpty(_innerString);
+    }
 
     /**
      * @return {@code true} if this string's content is empty, otherwise {@code false}
      */
-    boolean isEmptyString();
+    public final boolean isEmptyString()
+    {
+        return _innerString == null;
+    }
 
     /**
      * @return {@code false} if this string's content is empty, otherwise {@code true}
      */
-    default boolean isNonEmptyString()
+    public final boolean isNonEmptyString()
     {
         return !isEmptyString();
     }
@@ -94,30 +129,22 @@ public interface EmptyStrOr<S extends NonEmptyString>
      * @param defaultValue the value to return if this string is empty. may be {@code null}.
      * @return the inner string or {@code defaultValue}.
      */
-    S getOrDefault(S defaultValue);
+    public final S getOrDefault(S defaultValue) // TODO rename orElse to match JDK 8 convention
+    {
+        if(_innerString == null)
+            return defaultValue;
+
+        return _innerString;
+    }
 
     /**
      * @return if non-empty returns {@link NonEmptyString#toString()} otherwise {@code ""}.
      */
-    String toString();
-
-    /**
-     * @return a {@code EmptyStrOr<S>} instance with an inner empty string as content. never {@code null}.
-     */
-    static <S extends NonEmptyString> EmptyStrOr<S> make()
+    public String toString()
     {
-        return new EmptyStrOrEmpty<>();
-    }
+        if(_innerString == null)
+            return  "";
 
-    /**
-     * @param string the non-empty string value to use as the returned string's content. may not be {@code null}.
-     * @return a {@code EmptyStrOr<S>} instance with the given inner string as content. never {@code null}.
-     */
-    static <S extends NonEmptyString> EmptyStrOr<S> make(S string)
-    {
-        if(string == null)
-            throw new NullPointerException("string");
-
-        return new EmptyStrOrNonEmpty<>(string);
+        return _innerString.toString();
     }
 }

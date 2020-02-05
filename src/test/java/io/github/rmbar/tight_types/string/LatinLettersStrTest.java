@@ -77,16 +77,16 @@ import org.junit.Test;
 public class LatinLettersStrTest extends LatinLettersDigitsStrTest
 {
     @Override
-    LatinLettersStr make(String value)
+    public LatinLettersStr make(String value)
     {
-        return LatinLettersStr.make(value);
+        return new LatinLettersStr(value);
     }
 
     @Override
     @Test(expected = IllegalArgumentException.class)
     public void testOne()
     {
-        LatinLettersStr.make("1");
+        new LatinLettersStr("1");
     }
 
     @Override

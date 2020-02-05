@@ -53,20 +53,27 @@ package io.github.rmbar.tight_types.string;
  * {@link Character#isWhitespace(int)}
  *
  */
-public interface VisibleString extends NonEmptyString
+public class VisibleString extends NonEmptyString
 {
     /**
-     * Creates a {@code VisibleString} from the given value.
+     * Creates a new string from the given character sequence.
      *
-     * @param value the value of the {@code VisibleString}. may not be {@code null}.
-     * @return a string composed of the characters of {@code value}. never {@code null}.
-     * @throws IllegalArgumentException if {@code value} does not contain at least one non-whitespace character.
+     * @param value the characters of the string. may not be {@code null}.
+     * @throws IllegalArgumentException if the given string contains only whitespace characters.
      */
-    static VisibleString make(String value)
+    public VisibleString(String value)
     {
-        if(value == null)
-            throw new NullPointerException();
+        super(value);
 
-        return new VisibleStringDefault(value);
+        boolean onlyWhitespaceSeen = true;
+        for(int i = 0; i<value.length() && onlyWhitespaceSeen; i++)
+        {
+            int codePoint = value.codePointAt(i);
+            if(!Character.isWhitespace(codePoint))
+                onlyWhitespaceSeen = false;
+        }
+
+        if(onlyWhitespaceSeen)
+            throw new IllegalArgumentException("value contains only whitespace");
     }
 }

@@ -78,9 +78,9 @@ import org.junit.Test;
 public class VisibleStringTest extends NonEmptyStringTest
 {
     @Override
-    VisibleString make(String value)
+    public VisibleString make(String value)
     {
-        return VisibleString.make(value);
+        return new VisibleString(value);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -124,17 +124,5 @@ public class VisibleStringTest extends NonEmptyStringTest
     public void testA()
     {
         Assert.assertEquals("A", make("A").toString());
-    }
-
-    @Test
-    public void testSpaceA()
-    {
-        Assert.assertEquals(" A", VisibleString.make(" A").toString());
-    }
-
-    @Test
-    public void testASpace()
-    {
-        Assert.assertEquals("A ", VisibleString.make("A ").toString());
     }
 }

@@ -54,21 +54,28 @@ package io.github.rmbar.tight_types.string;
  * Formally, the Unicode code points of the characters of this string may only be in the inclusive ranges: [65-90] or
  * [97-122].
  */
-public interface LatinLettersStr extends LatinLettersDigitsStr
+public class LatinLettersStr extends LatinLettersDigitsStr
 {
     /**
-     * Creates a new string from the given value.
+     * Creates a new string from the given character sequence.
      *
-     * @param value the value of the {@code LatinLettersStr}. may not be {@code null}.
-     * @return a string composed of the characters of {@code value}. never {@code null}.
-     * @throws IllegalArgumentException if {@code value} is empty or contains a unicode character not in the ranges
-     *                                  [65-90] or [97-122]
+     * @param value the characters of the string. may not be {@code null}.
+     * @throws IllegalArgumentException if the given string contains any character that is not in the range A-Z or a-z.
      */
-    static LatinLettersStr make(String value)
+    public LatinLettersStr(String value)
     {
-        if(value == null)
-            throw new NullPointerException();
+        super(value);
 
-        return new LatinLettersStrDefault(value);
+        for(int i = 0; i<value.length(); i++)
+        {
+            int codePoint = value.codePointAt(i);
+
+            // check only A-Z or a-z
+            if((codePoint >= 65 && codePoint <= 90) || (codePoint >= 97 && codePoint <= 122))
+                continue;
+
+            throw new IllegalArgumentException("value may only be composed of A-Z, and a-z found " +
+                                                value.charAt(i) + " at position " + i + " in " + value);
+        }
     }
 }

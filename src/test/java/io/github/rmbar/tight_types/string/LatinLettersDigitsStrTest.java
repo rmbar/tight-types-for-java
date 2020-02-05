@@ -72,14 +72,15 @@
 
 package io.github.rmbar.tight_types.string;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class LatinLettersDigitsStrTest extends VisibleStringTest
 {
     @Override
-    LatinLettersDigitsStr make(String value)
+    public LatinLettersDigitsStr make(String value)
     {
-        return LatinLettersDigitsStr.make(value);
+        return new LatinLettersDigitsStr(value);
     }
 
     @Test(expected = IllegalArgumentException.class)

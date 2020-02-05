@@ -51,12 +51,35 @@ package io.github.rmbar.tight_types.string;
 /**
  * An immutable string of non-zero length.
  */
-public interface NonEmptyString extends Comparable<NonEmptyString>
+public class NonEmptyString implements Comparable<NonEmptyString>
 {
+    /**
+     * The string value in Java String form.
+     */
+    private final String _value;
+
+    /**
+     * Creates a new string from the given non-empty character sequence.
+     *
+     * @param value the characters of the string. may not be {@code null}.
+     * @throws IllegalArgumentException if the given string is empty.
+     */
+    public NonEmptyString(String value)
+    {
+        if(value.isEmpty())
+            throw new IllegalArgumentException("value may not be empty.");
+
+        _value = value;
+    }
+
     /**
      * @return returns the same value as {@code toString().hashCode()}.
      */
-    int hashCode();
+    // final so security sensitive users of the library can reason about the behavior of the method with confidence.
+    public final int hashCode()
+    {
+        return toString().hashCode();
+    }
 
     /**
      * Compares this string to the given  object. The result is {@code true} if and only if the argument is
@@ -66,7 +89,11 @@ public interface NonEmptyString extends Comparable<NonEmptyString>
      * @param other the other object. may be {@code null}.
      * @return {@code true} if the strings represent the same character content.
      */
-    boolean equals(Object other);
+    // final so security sensitive users of the library can reason about the behavior of the method with confidence.
+    public final boolean equals(Object other)
+    {
+        return other instanceof NonEmptyString && ((NonEmptyString)other).equals(this);
+    }
 
     /**
      * Compares this string to the given  string. The result is {@code true} if and only if the argument is
@@ -75,13 +102,15 @@ public interface NonEmptyString extends Comparable<NonEmptyString>
      * @param other the other object. may be {@code null}.
      * @return {@code true} if the strings represent the same character content.
      */
-    default boolean equals(NonEmptyString other)
+    // final so security sensitive users of the library can reason about the behavior of the method with confidence.
+    public final boolean equals(NonEmptyString other)
     {
         return other != null && other.toString().equals(toString());
     }
 
+    // final so security sensitive users of the library can reason about the behavior of the method with confidence.
     @Override
-    default int compareTo(NonEmptyString other)
+    public final int compareTo(NonEmptyString other)
     {
         return toString().compareTo(other.toString());
     }
@@ -89,20 +118,9 @@ public interface NonEmptyString extends Comparable<NonEmptyString>
     /**
      * @return the value of this string in {@code String} form. never {@code null}.
      */
-    String toString();
-
-    /**
-     * Creates a non-empty string from the given string.
-     *
-     * @param value the characters of the {@code NonEmptyString}. may not be {@code null}.
-     * @return the given value of in {@code NonEmptyString} form.
-     * @throws IllegalArgumentException if {@code value} has length zero.
-     */
-    static NonEmptyString make(String value)
+    // final so security sensitive users of the library can reason about the behavior of the method with confidence.
+    public final String toString()
     {
-        if(value == null)
-            throw new NullPointerException();
-
-        return new NonEmptyStringDefault(value);
+        return _value;
     }
 }
