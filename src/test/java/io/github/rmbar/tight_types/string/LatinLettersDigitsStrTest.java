@@ -86,13 +86,13 @@ public class LatinLettersDigitsStrTest extends VisibleStringTest
     @Test(expected = IllegalArgumentException.class)
     public void testQuestionMark()
     {
-        make("?");
+        new LatinLettersDigitsStr("?");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testMarcusAurelius()
     {
-        make("Marcus Aurelius");
+        new LatinLettersDigitsStr("Marcus Aurelius");
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -104,7 +104,7 @@ public class LatinLettersDigitsStrTest extends VisibleStringTest
     @Test
     public void testMarcus()
     {
-        make("Marcus");
+        new LatinLettersDigitsStr("Marcus");
     }
 
     @Test
@@ -114,9 +114,16 @@ public class LatinLettersDigitsStrTest extends VisibleStringTest
     }
 
     @Test
+    public void testDeadBeef()
+    {
+        make("deadbeef");
+    }
+
+
+    @Test
     public void testMarcus1()
     {
-        make("Marcus1");
+        new LatinLettersDigitsStr("Marcus1");
     }
 
     @SuppressWarnings("SpellCheckingInspection")

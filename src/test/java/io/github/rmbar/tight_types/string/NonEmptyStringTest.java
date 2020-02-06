@@ -98,19 +98,19 @@ public class NonEmptyStringTest
     @Test
     public void testToString()
     {
-        Assert.assertEquals("Dog", make("Dog").toString());
+        Assert.assertEquals("beef", make("beef").toString());
     }
 
     @Test
     public void testToEquals()
     {
-        Assert.assertEquals(make("Dog"), make("Dog"));
+        Assert.assertEquals(make("beef"), make("beef"));
     }
 
     @Test
     public void testHashCode()
     {
-        Assert.assertEquals("Dog".hashCode(), make("Dog").hashCode());
+        Assert.assertEquals("beef".hashCode(), make("beef").hashCode());
     }
 
     @Test
