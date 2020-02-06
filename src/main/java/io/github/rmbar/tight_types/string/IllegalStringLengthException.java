@@ -24,19 +24,21 @@
 
 package io.github.rmbar.tight_types.string;
 
-import org.junit.Test;
-
-public class HexadecimalStrTest extends LatinLettersDigitsStrTest
+/**
+ * Thrown to indicate that a string value provided as an argument is of invalid length.
+ */
+public class IllegalStringLengthException extends IllegalArgumentException
 {
-    @Override
-    public HexadecimalStr make(String value)
+    /**
+     * Constructs a new exception specifying that the given string is not of the given length.
+     *
+     * @param string the offending string. may not be {@code null}.
+     * @param expectedLength the expected, but not found, length of the given string.
+     */
+    IllegalStringLengthException(NonEmptyString string, int expectedLength)
     {
-        return new HexadecimalStr(value);
-    }
+        super("Expecting a string of length " + expectedLength + " but given a string of length " +
+               string.toString().length() + ". Offender: " + string.toString());
 
-    @Test(expected = IllegalStringContentException.class)
-    public void testBeefy()
-    {
-        make("Beefy");
     }
 }

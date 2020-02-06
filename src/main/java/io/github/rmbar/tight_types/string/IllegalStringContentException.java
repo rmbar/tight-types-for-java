@@ -24,19 +24,19 @@
 
 package io.github.rmbar.tight_types.string;
 
-import org.junit.Test;
-
-public class HexadecimalStrTest extends LatinLettersDigitsStrTest
+/**
+ * Thrown to indicate that a string value provided as an argument is invalid.
+ */
+public class IllegalStringContentException extends IllegalArgumentException
 {
-    @Override
-    public HexadecimalStr make(String value)
+    /**
+     * Constructs an <code>IllegalStringContentException</code> with the
+     * specified detail message.
+     *
+     * @param   msg   the detail message.
+     */
+    public IllegalStringContentException(String msg)
     {
-        return new HexadecimalStr(value);
-    }
-
-    @Test(expected = IllegalStringContentException.class)
-    public void testBeefy()
-    {
-        make("Beefy");
+        super(msg);
     }
 }

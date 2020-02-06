@@ -83,14 +83,14 @@ public class LatinLettersStrTest extends LatinLettersDigitsStrTest
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testOne()
     {
         new LatinLettersStr("1");
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testMarcus1()
     {
         make("Marcus1");

@@ -67,7 +67,7 @@ public class NonEmptyString implements Comparable<NonEmptyString>
     public NonEmptyString(String value)
     {
         if(value.isEmpty())
-            throw new IllegalArgumentException("value may not be empty.");
+            throw new IllegalStringContentException("value may not be empty.");
 
         _value = value;
     }

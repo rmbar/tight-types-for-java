@@ -36,8 +36,8 @@ public class HexadecimalStr extends LatinLettersDigitsStr
      * Creates a new string from the given character sequence.
      *
      * @param value the characters of the string. may not be {@code null}.
-     * @throws IllegalArgumentException if the given string contains any character that is not in the range A-F, a-f,
-     *                                  or 0-9.
+     * @throws IllegalStringContentException if the given string contains any character that is not in the range A-F,
+     *                                       a-f, or 0-9.
      */
     public HexadecimalStr(String value)
     {
@@ -55,8 +55,8 @@ public class HexadecimalStr extends LatinLettersDigitsStr
             if(codePoint >= 48 && codePoint <= 57)
                 continue;
 
-            throw new IllegalArgumentException("value may only be composed of A-F, a-f, and 0-9 found " +
-                                                value.charAt(i) + " at position " + i + " in " + value);
+            throw new IllegalStringContentException("value may only be composed of A-F, a-f, and 0-9 found " +
+                                                     value.charAt(i) + " at position " + i + " in " + value);
         }
     }
 }

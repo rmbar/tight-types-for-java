@@ -83,7 +83,7 @@ public class NonEmptyStringTest
         return new NonEmptyString(value);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testEmpty()
     {
         make("");

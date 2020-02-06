@@ -24,19 +24,20 @@
 
 package io.github.rmbar.tight_types.string;
 
-import org.junit.Test;
-
-public class HexadecimalStrTest extends LatinLettersDigitsStrTest
+/**
+ * A string of length 64 that can be represented as a string of type <code>S</code> with the same character content.
+ *
+ * @param <S> the type which this string is guaranteed to be representable by without error.
+ */
+public class Len64<S extends NonEmptyString> extends LenN<S>
 {
-    @Override
-    public HexadecimalStr make(String value)
+    /**
+     * Creates a string wit the same character content as the given string. may not be {@code null}.
+     *
+     * @param value the character content of the string to create. may not be {@code null}.
+     */
+    public Len64(S value)
     {
-        return new HexadecimalStr(value);
-    }
-
-    @Test(expected = IllegalStringContentException.class)
-    public void testBeefy()
-    {
-        make("Beefy");
+        super(value, 64);
     }
 }

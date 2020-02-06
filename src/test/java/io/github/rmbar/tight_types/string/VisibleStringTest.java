@@ -83,38 +83,38 @@ public class VisibleStringTest extends NonEmptyStringTest
         return new VisibleString(value);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testEmptyString()
     {
         make("");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testSpace()
     {
         make(" ");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testSpaces()
     {
         make(" ");
     }
 
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testNewline()
     {
         make("\n");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testTab()
     {
         make("\t");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testTabs()
     {
         make("\t\t");

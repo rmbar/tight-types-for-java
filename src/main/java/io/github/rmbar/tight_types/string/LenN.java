@@ -24,19 +24,25 @@
 
 package io.github.rmbar.tight_types.string;
 
-import org.junit.Test;
-
-public class HexadecimalStrTest extends LatinLettersDigitsStrTest
+class LenN<S extends NonEmptyString> extends NonEmptyString
 {
-    @Override
-    public HexadecimalStr make(String value)
+    private final S _innerString;
+
+    LenN(S innerString, int length)
     {
-        return new HexadecimalStr(value);
+        super(innerString.toString());
+
+        if(innerString.toString().length() != length)
+            throw new IllegalStringLengthException(innerString, length);
+
+        _innerString = innerString;
     }
 
-    @Test(expected = IllegalStringContentException.class)
-    public void testBeefy()
+    /**
+     * @return a string with the same character content as this string, but in <code>S</code> form. Never {@code null}.
+     */
+    public S toS()
     {
-        make("Beefy");
+        return _innerString;
     }
 }

@@ -24,19 +24,18 @@
 
 package io.github.rmbar.tight_types.string;
 
-import org.junit.Test;
-
-public class HexadecimalStrTest extends LatinLettersDigitsStrTest
+public class Len4Test extends LenNTest
 {
     @Override
-    public HexadecimalStr make(String value)
+    protected int getCorrectLength()
     {
-        return new HexadecimalStr(value);
+        return 4 ;
     }
 
-    @Test(expected = IllegalStringContentException.class)
-    public void testBeefy()
+    @Override
+    protected Len4<NonEmptyString> make(NonEmptyString value)
     {
-        make("Beefy");
+        return new Len4<>(value);
     }
 }
+

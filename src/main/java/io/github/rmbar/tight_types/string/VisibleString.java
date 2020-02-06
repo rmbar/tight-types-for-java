@@ -74,6 +74,6 @@ public class VisibleString extends NonEmptyString
         }
 
         if(onlyWhitespaceSeen)
-            throw new IllegalArgumentException("value contains only whitespace");
+            throw new IllegalStringContentException("value contains only whitespace");
     }
 }

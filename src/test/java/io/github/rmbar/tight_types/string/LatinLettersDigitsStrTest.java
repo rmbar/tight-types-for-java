@@ -72,7 +72,6 @@
 
 package io.github.rmbar.tight_types.string;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class LatinLettersDigitsStrTest extends VisibleStringTest
@@ -83,13 +82,13 @@ public class LatinLettersDigitsStrTest extends VisibleStringTest
         return new LatinLettersDigitsStr(value);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testQuestionMark()
     {
         new LatinLettersDigitsStr("?");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStringContentException.class)
     public void testMarcusAurelius()
     {
         new LatinLettersDigitsStr("Marcus Aurelius");

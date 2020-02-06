@@ -79,8 +79,8 @@ public class LatinLettersDigitsStr extends VisibleString
             if(codePoint >= 48 && codePoint <= 57)
                 continue;
 
-            throw new IllegalArgumentException("value may only be composed of A-Z, a-z, and 0-9 found " +
-                                                value.charAt(i) + " at position " + i + " in " + value);
+            throw new IllegalStringContentException("value may only be composed of A-Z, a-z, and 0-9 found " +
+                                                     value.charAt(i) + " at position " + i + " in " + value);
         }
     }
 }
