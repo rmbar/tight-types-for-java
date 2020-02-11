@@ -35,6 +35,7 @@ public class Len8<S extends NonEmptyString> extends LenN<S>
      * Creates a string with the same character content as the given string. may not be {@code null}.
      *
      * @param value the character content of the string to create. may not be {@code null}.
+     * @throws IllegalStringLengthException if the given string is not of length 8.
      */
     public Len8(S value)
     {
