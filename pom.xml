@@ -52,7 +52,7 @@
         <repository>
             <id>github-rmbar-tighttypesforjava</id>
             <name>GitHub rmbar Apache Maven Packages Tight Types for Java</name>
-            <url>https://maven.pkg.github.com/rmbar/tighttypesforjava</url>
+            <url>https://maven.pkg.github.com/rmbar/tight-types-for-java</url>
         </repository>
     </distributionManagement>
 </project>
