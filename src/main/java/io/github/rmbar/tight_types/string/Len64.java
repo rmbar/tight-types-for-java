@@ -32,7 +32,7 @@ package io.github.rmbar.tight_types.string;
 public class Len64<S extends NonEmptyString> extends LenN<S>
 {
     /**
-     * Creates a string wit the same character content as the given string. may not be {@code null}.
+     * Creates a string with the same character content as the given string. may not be {@code null}.
      *
      * @param value the character content of the string to create. may not be {@code null}.
      */
