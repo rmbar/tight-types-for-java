@@ -29,6 +29,14 @@ package io.github.rmbar.tight_types.string;
  */
 public class IllegalStringLengthException extends IllegalArgumentException
 {
+    public enum Violation
+    {
+        TooLong,
+        TooShort
+    }
+
+    private final String _message;
+
     /**
      * Constructs a new exception specifying that the given string is not of the given length.
      *
@@ -37,8 +45,37 @@ public class IllegalStringLengthException extends IllegalArgumentException
      */
     IllegalStringLengthException(NonEmptyString string, int expectedLength)
     {
-        super("Expecting a string of length " + expectedLength + " but given a string of length " +
-               string.toString().length() + ". Offender: " + string.toString());
+        _message = "Expecting a string of length " + expectedLength + " but given a string of length " +
+                    string.toString().length() + ". Offender: " + string.toString();
 
+    }
+
+    /**
+     * Constructs a new exception specifying that the given string is not of valid length.
+     *
+     * @param string the offending string. may not be {@code null}.
+     * @param limit the expected length limitation value.
+     * @param violation the reason the given string length is in violation relative to the given limit. may not be
+     *                  {@code null}.
+     */
+    IllegalStringLengthException(NonEmptyString string, int limit, Violation violation)
+    {
+        if (violation == Violation.TooLong)
+        {
+            _message = "Expecting a string of length of at most" + limit + " but given a string of length " +
+                       string.toString().length() + ". Offender: " + string.toString();
+        }
+        else
+        {
+            _message = "Expecting a string of length of at least" + limit + " but given a string of length " +
+                        string.toString().length() + ". Offender: " + string.toString();
+        }
+
+    }
+
+    @Override
+    public String getMessage()
+    {
+        return _message;
     }
 }
