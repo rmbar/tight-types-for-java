@@ -5,7 +5,7 @@
 
     <groupId>tighttypes.io</groupId>
     <artifactId>tight-types-4-java</artifactId>
-    <version>1.1.0-dev</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <properties>
