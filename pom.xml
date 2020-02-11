@@ -50,9 +50,9 @@
     </dependencies>
     <distributionManagement>
         <repository>
-            <id>github-rmbar-tighttypes4java</id>
-            <name>GitHub rmbar Apache Maven Packages Tight Types 4 Java</name>
-            <url>https://maven.pkg.github.com/rmbar/tighttypes4java</url>
+            <id>github-rmbar-tighttypesforjava</id>
+            <name>GitHub rmbar Apache Maven Packages Tight Types for Java</name>
+            <url>https://maven.pkg.github.com/rmbar/tighttypesforjava</url>
         </repository>
     </distributionManagement>
 </project>
