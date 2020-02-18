@@ -86,6 +86,27 @@ public class NonEmptyString implements Comparable<NonEmptyString>
     }
 
     /**
+     * Compares this string to the given strings. The result is {@code true} if and only if there exists one or more
+     * strings among the given strings that is not {@code null} and represents the same sequence of characters as this
+     * object.
+     *
+     * @param others the other strings. may be {@code null}.
+     * @return {@code true} if at least one given string represents the same character content, otherwise {@code false}.
+     */
+    // final so security sensitive users of the library can reason about the behavior of the method with confidence.
+    public final boolean equalsStringAny(String... others)
+    {
+        if(others == null)
+            return false;
+
+        for(String str : others)
+            if(equalsString(str))
+                return true;
+
+        return false;
+    }
+
+    /**
      * @return returns the same value as {@code toString().hashCode()}.
      */
     // final so security sensitive users of the library can reason about the behavior of the method with confidence.

@@ -124,7 +124,26 @@ public class NonEmptyStringTest
     {
         Assert.assertFalse(make("beef").equalsString("dead"));
     }
-    
+
+
+    @Test
+    public void testEqualsStringAny_True()
+    {
+        Assert.assertTrue(make("beef").equalsStringAny("dead", "beef"));
+    }
+
+    @Test
+    public void testEqualsStringAny_False()
+    {
+        Assert.assertFalse(make("beef").equalsStringAny("dead", "dead"));
+    }
+
+    @Test
+    public void testEqualsStringAny_Null()
+    {
+        Assert.assertFalse(make("beef").equalsStringAny((String[]) null));
+    }
+
     @Test
     public void testHashCode()
     {
