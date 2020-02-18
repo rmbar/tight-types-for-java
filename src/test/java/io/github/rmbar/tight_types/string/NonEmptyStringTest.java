@@ -102,11 +102,29 @@ public class NonEmptyStringTest
     }
 
     @Test
-    public void testToEquals()
+    public void testEquals_True()
     {
         Assert.assertEquals(make("beef"), make("beef"));
     }
 
+    @Test
+    public void testEquals_False()
+    {
+        Assert.assertNotEquals(make("beef"), make("dead"));
+    }
+
+    @Test
+    public void testEqualsString_True()
+    {
+        Assert.assertTrue(make("beef").equalsString("beef"));
+    }
+
+    @Test
+    public void testEqualsString_False()
+    {
+        Assert.assertFalse(make("beef").equalsString("dead"));
+    }
+    
     @Test
     public void testHashCode()
     {

@@ -73,6 +73,19 @@ public class NonEmptyString implements Comparable<NonEmptyString>
     }
 
     /**
+     * Compares this string to the given string. The result is {@code true} if and only if the argument is
+     * not {@code null} and represents the same sequence of characters as this object.
+     *
+     * @param other the other string. may be {@code null}.
+     * @return {@code true} if the strings represent the same character content, otherwise {@code false}.
+     */
+    // final so security sensitive users of the library can reason about the behavior of the method with confidence.
+    public final boolean equalsString(String other)
+    {
+        return toString().equals(other);
+    }
+
+    /**
      * @return returns the same value as {@code toString().hashCode()}.
      */
     // final so security sensitive users of the library can reason about the behavior of the method with confidence.
@@ -87,7 +100,7 @@ public class NonEmptyString implements Comparable<NonEmptyString>
      * as this object.
      *
      * @param other the other object. may be {@code null}.
-     * @return {@code true} if the strings represent the same character content.
+     * @return {@code true} if the strings represent the same character content, otherwise {@code false}.
      */
     // final so security sensitive users of the library can reason about the behavior of the method with confidence.
     public final boolean equals(Object other)
@@ -96,11 +109,11 @@ public class NonEmptyString implements Comparable<NonEmptyString>
     }
 
     /**
-     * Compares this string to the given  string. The result is {@code true} if and only if the argument is
+     * Compares this string to the given string. The result is {@code true} if and only if the argument is
      * not {@code null} and represents the same sequence of characters as this object.
      *
      * @param other the other object. may be {@code null}.
-     * @return {@code true} if the strings represent the same character content.
+     * @return {@code true} if the strings represent the same character content, otherwise {@code false}.
      */
     // final so security sensitive users of the library can reason about the behavior of the method with confidence.
     public final boolean equals(NonEmptyString other)
